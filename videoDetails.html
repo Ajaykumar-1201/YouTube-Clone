@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./videoDetails.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-1">
+        <img class="hamburger" src="./assets/Hamburger.svg" />
+        <img class="yt-logo" src="./assets/Youtube-Logo.svg" />
+      </div>
+      <div class="search-bar nav-2">
+        <input id="search-input" placeholder="Search Videos" />
+        <button class="search-container" id="search-button">
+          <img src="./assets/Search.svg" />
+        </button>
+        <div class="mic-container">
+          <img class="mic" src="./assets/Mic.svg" />
+        </div>
+      </div>
+      <div class="nav-3">
+        <img src="./assets/videoplus.svg" />
+        <img src="./assets/Grid.svg" />
+        <img class="notification" src="./assets/Notification.svg" />
+        <img class="profile" src="./assets/Profile.svg" />
+      </div>
+    </nav>
+
+    <div class="detail-container">
+      <div class="left">
+        <div id="video-placeholder"></div>
+
+        <div id="comments-container"></div>
+      </div>
+      <div class="right"></div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="./videoDetails.js"></script>
+  </body>
+</html>
