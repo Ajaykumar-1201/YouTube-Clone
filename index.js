@@ -34,21 +34,17 @@ function navigateToVideoDetails(videoId) {
 }
 
 function formatYouTubeViewCount(viewCountS) {
-    const viewCount = parseInt(viewCountS, 10);
-    if (viewCount >= 1e9) {
-      // If view count is in billions or more, show in billions as an integer
-      return (viewCount / 1e9).toFixed(0) + 'B';
-    } else if (viewCount >= 1e6) {
-      // If view count is in millions, show in millions as an integer
-      return (viewCount / 1e6).toFixed(0) + 'M';
-    } else if (viewCount >= 1000) {
-      // If view count is in thousands or more, show in thousands as an integer
-      return (viewCount / 1000).toFixed(0) + 'K';
-    } else {
-      // If view count is less than a thousand, show it as is
-      return viewCount.toLocaleString();
-    }
+  const viewCount = parseInt(viewCountS, 10);
+  if (viewCount >= 1e9) {
+    return (viewCount / 1e9).toFixed(0) + "B";
+  } else if (viewCount >= 1e6) {
+    return (viewCount / 1e6).toFixed(0) + "M";
+  } else if (viewCount >= 1000) {
+    return (viewCount / 1000).toFixed(0) + "K";
+  } else {
+    return viewCount.toLocaleString();
   }
+}
 
 function renderVideosOntoUI(videosList) {
   //   videosList will be an array of video objects.
@@ -77,9 +73,9 @@ function renderVideosOntoUI(videosList) {
                 ${video.snippet.title}
             </p>
             <p class="gray-text">${video.snippet.channelTitle}</p>
-            <p class="gray-text">${formatYouTubeViewCount(viewCount)} . ${calculateTheTimeGap(
-      video.snippet.publishTime
-    )}</p>
+            <p class="gray-text">${formatYouTubeViewCount(
+              viewCount
+            )} . ${calculateTheTimeGap(video.snippet.publishTime)}</p>
             </div>
         </div>`;
 
@@ -99,7 +95,7 @@ async function fetchChannelLogo(channelId) {
     const result = await response.json();
     return result.items[0].snippet.thumbnails.high.url;
   } catch (error) {
-    alert("Failed to load channel logo for ", channelId);
+    console.log(error);
   }
 }
 
@@ -111,35 +107,9 @@ async function getVideoStatistics(videoId) {
   try {
     const response = await fetch(endpoint);
     const result = await response.json();
-    console.log(result.items[0].statistics);
     return result.items[0].statistics;
-  } catch (error) {
-    console.log(error);
-    // alert("Failed to fetch Statistics for ", videoId);
-  }
+  } catch (error) {}
 }
-
-/**
- *  <div class="video">
-        <img
-          src="https://picsum.photos/200/300"
-          class="thumbnail"
-          alt="thumbnail"
-        />
-        <div class="bottom-container">
-          <div class="logo-container">
-            <img class="logo" src="https://picsum.photos/40/40" alt="" />
-          </div>
-          <div class="title-container">
-            <p class="title">
-              Lorem ipsum dolor sit amet, consecte adipiscing elit.
-            </p>
-            <p class="gray-text">James Gouse</p>
-            <p class="gray-text">15K Views . 1 week ago</p>
-          </div>
-        </div>
-      </div>
- */
 
 async function fetchSearchResults(searchString) {
   // searchString will the input entered by the user
@@ -147,7 +117,6 @@ async function fetchSearchResults(searchString) {
   try {
     const response = await fetch(endpoint);
     const result = await response.json();
-    console.log(result);
 
     for (let i = 0; i < result.items.length; i++) {
       let videoId = result.items[i].id.videoId;
@@ -162,47 +131,10 @@ async function fetchSearchResults(searchString) {
 
     renderVideosOntoUI(result.items); // 2
   } catch (error) {
-    console.log(error);
     alert("Some error occured");
   }
 }
 
-/*
- {
-    "kind": "youtube#searchResult",
-    "etag": "Dn_HjQZj7iXCRkRlNQXL3xxXTxE",
-    "id": {
-        "kind": "youtube#video",
-        "videoId": "_O_9HUZvJK4"
-    },
-    "snippet": {
-        "publishedAt": "2023-07-31T13:18:46Z",
-        "channelId": "UCJsApDpIBPpRRg0n9ZVmKAQ",
-        "title": "Weather obsession of Bangalore people📈🤣 #shorts #ahmedmasood #bangalore #ytshorts",
-        "description": "",
-        "thumbnails": {
-            "default": {
-                "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/default.jpg",
-                "width": 120,
-                "height": 90
-            },
-            "medium": {
-                "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-            },
-            "high": {
-                "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-            }
-        },
-        "channelTitle": "Ahmed Masood",
-        "liveBroadcastContent": "none",
-        "publishTime": "2023-07-31T13:18:46Z"
-    },
-    "statistics" :
-} */
 searchButton.addEventListener("click", () => {
   const searchValue = searchInput.value;
   fetchSearchResults(searchValue);
@@ -216,5 +148,3 @@ searchInput.addEventListener("keypress", (event) => {
 });
 
 fetchSearchResults("");
-
-// console.log("Hello");
