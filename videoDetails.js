@@ -10,9 +10,9 @@ window.addEventListener("load", () => {
       height: "455",
       width: "640",
       videoId,
-      // playerVars: {
-      //   autoplay: 1, // Set autoplay to 1 for true
-      // },
+      playerVars: {
+        autoplay: 1, // Set autoplay to 1 for true
+      },
     });
 
     loadComments(videoId);

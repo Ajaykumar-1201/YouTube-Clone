@@ -30,8 +30,7 @@ function calculateTheTimeGap(publishTime) {
 }
 
 function navigateToVideoDetails(videoId) {
-  document.cookie = `id=${videoId}; path=videoDetails.html`;
-  window.location.href = "http://127.0.0.1:5501/videoDetails.html";
+  window.location.href = `videoDetails.html?id=${videoId}`;
 }
 
 function formatYouTubeViewCount(viewCountS) {
