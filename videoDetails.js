@@ -7,8 +7,8 @@ window.addEventListener("load", () => {
 
   if (YT) {
     new YT.Player("video-placeholder", {
-      height: "300",
-      width: "500",
+      height: "455",
+      width: "640",
       videoId,
       // playerVars: {
       //   autoplay: 1, // Set autoplay to 1 for true

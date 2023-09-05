@@ -216,6 +216,6 @@ searchInput.addEventListener("keypress", (event) => {
   }
 });
 
-// fetchSearchResults("");
+fetchSearchResults("");
 
 // console.log("Hello");
